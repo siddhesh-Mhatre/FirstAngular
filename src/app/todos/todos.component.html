@@ -1,0 +1,19 @@
+<h1 class="text-center">Todo List by Siddhesh Don</h1>
+
+<app-add-todo (todoAdd)="addTodo($event)"  ></app-add-todo>
+
+
+<h4>Your List</h4>
+
+<!-- Check if there are no todos, and display "No Todos to Display" if true -->
+<div *ngIf="todos.length === 0; else elseBlock">No Todos to Display</div>
+
+<!-- Else block to display todos -->
+<ng-template #elseBlock>
+  <div>
+    <div *ngFor="let todo of todos; index as i">
+      <!-- Pass each todo to the child component and receive the todoDelete event -->
+      <app-todo-items [todo]="todo" [i]="i" (todoDelete)="DeleteTodo($event)" (todoCheckbox)="toggelTodo($event)"></app-todo-items>
+    </div>
+  </div>
+</ng-template>
